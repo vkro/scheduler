@@ -14,6 +14,12 @@ export default function DayList(props) {
   })
 
 
+  
 
-  return (<ul>{mapInterviewers</ul>)
+
+
+  return (<section className="interviewers">
+          <h4 className="interviewers__header text--light">Interviewer</h4>
+          <ul className="interviewers__list">{mapInterviewers}</ul>
+          </section>)
 };
