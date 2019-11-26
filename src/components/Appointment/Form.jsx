@@ -4,13 +4,18 @@ import InterviewerList from "components/InterviewerList";
 
 
 export default function Form(props) {
+
+  const [ name, setName ] = useState(props.name || null);
+  const [ interviewer, setInterviewer ] = useState(props.interviewer || null);
+
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
-            name="name"
+            name={name}
             type="text"
             placeholder="Enter Student Name"
             /*
