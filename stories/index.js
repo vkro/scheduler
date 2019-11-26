@@ -13,6 +13,7 @@ import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment/index.js";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
 //Initiates Storybook and registers DayListItem component
 storiesOf("DayListItem", module)
@@ -141,6 +142,12 @@ storiesOf("DayList", module)
       ));
 
 
+
+      const student = {
+        id: 1,
+        name: "Lynda Miller-Jones"
+      };
+
       storiesOf("Appointment", module)
       .addParameters({
         backgrounds: [{ name: "white", value: "#fff", default: true}]
@@ -149,3 +156,8 @@ storiesOf("DayList", module)
       .add("Appointment with Time", () => <Appointment time="12pm"/>)
       .add("Header", () => <Header time="12pm"/>)
       .add("Empty", () => <Empty onClick={action("onAdd")}/>)
+      .add("Show", () => <Show 
+                          student={student.name}
+                          interviewer={interviewer}
+                          onEdit={action("onEdit")}
+                          onDelete={action("onDelete")}/>)
