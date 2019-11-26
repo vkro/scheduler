@@ -8,6 +8,7 @@ import "index.scss";
 import Button from "components/Button";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
+import InterviewerListItem from "components/InterviewerListItem";
 
 //Initiates Storybook and registers DayListItem component
 storiesOf("DayListItem", module)
@@ -67,7 +68,7 @@ storiesOf("DayList", module)
   ))
   .add("Tuesday", () => (
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
-  ))
+    ))
   .add("Wednesday", () => (
     <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
   ));
