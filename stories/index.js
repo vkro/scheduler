@@ -10,7 +10,7 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
-// import Appointment from "components/Appointment";
+import Appointment from "components/Appointment/index";
 
 
 //Initiates Storybook and registers DayListItem component
