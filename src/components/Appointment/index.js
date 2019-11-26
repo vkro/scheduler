@@ -1,4 +1,4 @@
 import React from "react";
-import "Appointment/styles.scss"
+import "components/Appointment/styles.scss"
 
 
