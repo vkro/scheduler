@@ -147,5 +147,5 @@ storiesOf("DayList", module)
       })
       .add("Appointment", () => <Appointment />)
       .add("Appointment with Time", () => <Appointment time="12pm"/>)
-      .add("Header", () => <Header time="12pm"/>);
-      .add("Empty", () => <Empty onAdd={action("onAdd")}/>);
+      .add("Header", () => <Header time="12pm"/>)
+      .add("Empty", () => <Empty onClick={action("onAdd")}/>)
