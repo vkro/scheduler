@@ -14,6 +14,7 @@ import Appointment from "components/Appointment/index.js";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
+import Confirm from "components/Appointment/Confirm";
 
 //Initiates Storybook and registers DayListItem component
 storiesOf("DayListItem", module)
@@ -148,6 +149,8 @@ storiesOf("DayList", module)
         name: "Lynda Miller-Jones"
       };
 
+      const deleteMessage = "Delete the appointment?";
+
       storiesOf("Appointment", module)
       .addParameters({
         backgrounds: [{ name: "white", value: "#fff", default: true}]
@@ -161,3 +164,8 @@ storiesOf("DayList", module)
                           interviewer={interviewer}
                           onEdit={action("onEdit")}
                           onDelete={action("onDelete")}/>)
+      .add("Confirm", () => <Confirm
+                            message={deleteMessage}
+                            onConfirm={action("onConfirm")}
+                            onCancel={action("onCancel")}
+                            />)
