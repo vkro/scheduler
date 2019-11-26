@@ -151,6 +151,7 @@ storiesOf("DayList", module)
       };
 
       const deleteMessage = "Delete the appointment?";
+      const deleteStatusMessage = "Deleting";
 
       storiesOf("Appointment", module)
       .addParameters({
@@ -170,3 +171,6 @@ storiesOf("DayList", module)
                             onConfirm={action("onConfirm")}
                             onCancel={action("onCancel")}
                             />)
+      .add("Status: Deleting", () => <Status 
+                          message={deleteStatusMessage}
+                          />)
