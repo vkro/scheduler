@@ -10,6 +10,7 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+// import Appointment from "components/Appointment";
 
 
 //Initiates Storybook and registers DayListItem component
@@ -107,8 +108,8 @@ storiesOf("DayList", module)
         id={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
-        setInterviewer={action("setInterviewer")}
-      />
+        setInterviewer={event => action("setInterviewer")(interviewer.id)}
+        />
     ));
 
 
