@@ -153,6 +153,7 @@ storiesOf("DayList", module)
 
       const deleteMessage = "Delete the appointment?";
       const deleteStatusMessage = "Deleting";
+      const errorMessage = "Could not delete appointment";
 
       storiesOf("Appointment", module)
       .addParameters({
@@ -175,3 +176,7 @@ storiesOf("DayList", module)
       .add("Status: Deleting", () => <Status 
                           message={deleteStatusMessage}
                           />)
+      .add("Error", () => <Error
+                           message={errorMessage}
+                           onClose={action("onClose")}
+                           />)
