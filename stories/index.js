@@ -17,7 +17,7 @@ import Show from "components/Appointment/Show";
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
-import Form from "components/Application/Form";
+import Form from "components/Appointment/Form";
 
 //Initiates Storybook and registers DayListItem component
 storiesOf("DayListItem", module)
@@ -165,23 +165,39 @@ storiesOf("DayList", module)
       .add("Appointment with Time", () => <Appointment time="12pm"/>)
       .add("Header", () => <Header time="12pm"/>)
       .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
-      .add("Show", () => <Show 
-                          student={student.name}
-                          interviewer={interviewer}
-                          onEdit={action("onEdit")}
-                          onDelete={action("onDelete")}/>)
-      .add("Confirm", () => <Confirm
-                            message={deleteMessage}
-                            onConfirm={action("onConfirm")}
-                            onCancel={action("onCancel")}
-                            />)
-      .add("Status: Deleting", () => <Status 
-                          message={deleteStatusMessage}
-                          />)
-      .add("Status: Saving", () => <Status 
-                          message={saveStatusMessage}
-                          />)
-      .add("Error", () => <Error
-                           message={errorMessage}
-                           onClose={action("onClose")}
-                           />)
+      .add("Show", () => (
+        <Show 
+          student={student.name}
+          interviewer={interviewer}
+          onEdit={action("onEdit")}
+          onDelete={action("onDelete")}
+        />
+      ))
+      .add("Confirm", () => (
+        <Confirm
+          message={deleteMessage}
+          onConfirm={action("onConfirm")}
+          onCancel={action("onCancel")}
+        />
+      ))
+      .add("Status: Deleting", () => (
+        <Status 
+          message={deleteStatusMessage}
+        />
+      ))
+      .add("Status: Saving", () => (
+        <Status 
+          message={saveStatusMessage}
+        />
+      ))
+      .add("Error", () => (
+        <Error
+          message={errorMessage}
+          onClose={action("onClose")}
+        />
+      ))
+      .add("Edit Form", () => (
+        <Form
+      
+        />
+      ))
