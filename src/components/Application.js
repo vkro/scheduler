@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DayList from "components/DayList";
+import Appointment from "components/Appointment/index"
 
 
 import "components/Application.scss";
@@ -23,7 +24,7 @@ const days = [
 ];
 
 
-const appointments = [
+const appointments1 = [
   {
     id: 1,
     time: "12pm",
@@ -42,7 +43,7 @@ const appointments = [
   },
   {
     id: 3,
-    time: "11am",
+    time: "2pm",
     interview: {
       student: "Teddy Bear",
       interviewer: {
@@ -54,11 +55,11 @@ const appointments = [
   },
   {
     id: 4,
-    time: "2pm",
+    time: "3pm",
   },
   {
     id: 5,
-    time: "6am"
+    time: "4pm"
   }
 
 ];
@@ -66,6 +67,12 @@ const appointments = [
 export default function Application(props) {
 
   const [day, setDay] = useState("Monday");
+
+  const appointments = appointments1.map(appointment => {
+    return (
+    <Appointment key={appointment.id} {...appointment} />
+    )
+  });
 
   return (
     <main className="layout">
@@ -88,6 +95,10 @@ export default function Application(props) {
           src="images/lhl.png"
           alt="Lighthouse Labs"
         />      
+      </section>
+      <section className="schedule">
+        {appointments}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
