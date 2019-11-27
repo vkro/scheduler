@@ -18,9 +18,6 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
-import Header from "components/Appointment/Header";
-import Show from "components/Appointment/Show";
-import Empty from "components/Appointment/Empty";
 
 //Initiates Storybook and registers DayListItem component
 storiesOf("DayListItem", module)
@@ -214,5 +211,11 @@ storiesOf("DayList", module)
           onSave={action("onSave")}
           onCancel={action("onCancel")}
         />
+      ))
+      .add("Appointment Empty", () => (
+        <Fragment>
+          <Appointment id={1} time="12pm" />
+          <Appointment id="last" time="1pm"/>
+        </Fragment>
       ))
 
