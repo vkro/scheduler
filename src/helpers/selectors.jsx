@@ -1,6 +1,6 @@
 // helper selector functions for scheduler application
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
 
   const stateAppts = state.appointments;
   
