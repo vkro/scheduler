@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 
 
-export default function useVisualMode(input) {
-  // input is only there to set the initial value
-  const [mode, setMode] = useState(input);
+export default function useVisualMode(initial) {
+  // initial is only there to set the initial value
+  const [mode, setMode] = useState(initial);
+  const [history, setHistory] = useState([initial]);
   
   // transition allows us to advance to any other mode
   function transition(newMode) {
-    setMode(newMode)
+    setMode(newMode);
+    setHistory(history.concat(newMode));
   };
 
-  function back(oldMode) {
-    setMode(oldMode)
+  function back() {
+    history.pop()
+    setMode(history[history.length - 1])
   };
   
   return { mode, transition, back }
