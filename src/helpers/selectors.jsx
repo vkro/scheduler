@@ -23,9 +23,9 @@ export function getAppointmentsForDay(state, day) {
   };
 
   let appts = getAppointments(state, day);
-  let getobject = getAppointmentDetails(stateAppts, appts);
+  let getAppointmentObject = getAppointmentDetails(stateAppts, appts);
 
-  return getobject
+  return getAppointmentObject
 };
 
 // get interviewer's data given an object that contains an interviewer
@@ -48,4 +48,32 @@ export function getInterview(state, interview) {
     })
   return newInterview;
   }
+};
+
+
+// get appointments for a given day
+export function getInterviewersForDay(state, day) {
+
+  const stateInterviewers = state.interviewers;
+  
+  // get list of appointments in state for given day
+  const getInterviewers = function(state, day) {
+    let interviewers = [];
+    state.days.forEach(obj => {
+      if (obj.name === day) {
+        interviewers =  obj.interviewers;
+      }
+    });
+    return interviewers;
+  };
+  
+  // map appointment details from state for each appointment id on the list
+  const getInterviewerDetails = function(stateInterviewers, arr) {
+    return arr.map(x => stateInterviewers[x]);
+  };
+
+  let interviewers = getInterviewers(state, day);
+  let getInterviewerObject = getInterviewerDetails(stateInterviewers, interviewers);
+
+  return getInterviewerObject
 };
