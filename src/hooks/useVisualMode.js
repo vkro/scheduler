@@ -7,9 +7,12 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   
   // transition allows us to advance to any other mode
-  function transition(newMode) {
+  function transition(newMode, replace = false) {
     setMode(newMode);
-    setHistory(history.concat(newMode));
+    if (!replace) {
+      setHistory(history.concat(newMode)) 
+    }
+    
   };
 
   function back() {
