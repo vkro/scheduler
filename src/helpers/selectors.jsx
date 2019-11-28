@@ -6,7 +6,7 @@ export function getAppointmentsForDay(state, day) {
 
   const stateAppts = state.appointments;
   
-  // get list of appointments
+  // get list of appointments in state for given day
   const getAppointments = function(state, day) {
     let appointments = [];
     state.days.forEach(obj => {
@@ -17,7 +17,7 @@ export function getAppointmentsForDay(state, day) {
     return appointments;
   };
   
-  // map appointment details for each appointment id on the list
+  // map appointment details from state for each appointment id on the list
   const getAppointmentDetails = function(stateAppts, arr) {
     return arr.map(x => stateAppts[x]);
   };
@@ -30,7 +30,6 @@ export function getAppointmentsForDay(state, day) {
 
 // get interviewer's data given an object that contains an interviewer
 // returns null if no interview is booked
-
 export function getInterview(state, interview) {
 
   if (interview === null) {
@@ -39,10 +38,12 @@ export function getInterview(state, interview) {
     const interviewerId = interview.interviewer;
     const interviewers = state.interviewers;
     const newInterview = {...interview}
-
-    Object.keys(interviewers).forEach(interviewerKey => {
-      if (interviewers[interviewerKey]['id'] === interviewerId) {
-        newInterview["interviewer"] = {...interviewers[interviewerKey]};
+    // look through the interviewers object from state
+    Object.keys(interviewers).forEach(key => {
+      // for each interviewer obj in obj, check if id = given interviewer id
+      if (interviewers[key]['id'] === interviewerId) {
+        // update new interview object with interviewer obj from state
+        newInterview["interviewer"] = {...interviewers[key]};
       }
     })
   return newInterview;
