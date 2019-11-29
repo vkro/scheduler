@@ -41,9 +41,9 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    const newState = {...state, appointments};
-
-    setState(newState);
+    setState({
+      ...state, appointments
+    });
   };
 
   const schedule = appointments.map(appointment => {
