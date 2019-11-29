@@ -24,8 +24,8 @@ export default function Appointment(props) {
       interviewer
     };
     // pass to bookInterview in Application
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    props.bookInterview(props.id, interview)
+    .then(() => transition(SHOW));
   };
 
   return (<article className="appointment">

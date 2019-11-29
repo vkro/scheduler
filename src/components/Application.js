@@ -33,9 +33,6 @@ export default function Application(props) {
 
   const appointments = getAppointmentsForDay(state, state.day)
   const interviewers = getInterviewersForDay(state, state.day)
-  const { mode, transition, back } = useVisualMode(
-    props.appointments ? SHOW : EMPTY
-  );
 
   const bookInterview = function (id, interview) {
     const appointment = {
@@ -48,16 +45,18 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    axios({
-      method: 'put',
-      url: `http://localhost:8001/api/appointments/${id}`,
-      data: { interview: { ...interview } }
-    })
-      .then((response) => {
-        console.log(response.body)
+    return (
+      axios({
+        method: 'put',
+        url: `http://localhost:8001/api/appointments/${id}`,
+        data: { interview: { ...interview } }
       })
-      .resolve(transition(SHOW))
-      .catch(err => `this is the error ${err}`)
+        .then(() => {
+          setState(prev => ({ ...prev, appointments })
+          )
+        })
+        .catch(err => `this is the error ${err}`)
+    )
   };
 
   const schedule = appointments.map(appointment => {
