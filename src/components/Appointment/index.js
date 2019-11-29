@@ -24,7 +24,8 @@ export default function Appointment(props) {
       interviewer
     };
     // pass to bookInterview in Application
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview);
+    transition(SHOW);
   };
 
   return (<article className="appointment">
@@ -40,7 +41,7 @@ export default function Appointment(props) {
     )}
     {mode === CREATE && (
       <Form
-        interviewers={[]}
+        interviewers={props.interviewers}
         onCancel={() => back()}
         // pass name and interviweer from the Form to save function
         onSave={(name, interviewer) => save(name, interviewer)}
