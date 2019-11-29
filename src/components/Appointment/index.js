@@ -17,15 +17,14 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  const bookInterview = function(id, interview) {
-    console.log(id, interview);
-  };
-
   const save = function(name, interviewer) {
+    //create interview object from name and interviewer captured @ Form onSave
     const interview = {
       student: name,
       interviewer
     };
+    // pass to bookInterview in Application
+    props.bookInterview(props.id, interview)
   };
 
   return (<article className="appointment">
@@ -43,7 +42,8 @@ export default function Appointment(props) {
       <Form
         interviewers={[]}
         onCancel={() => back()}
-        onSave={() => props.onSave()}
+        // pass name and interviweer from the Form to save function
+        onSave={(name, interviewer) => save(name, interviewer)}
       />
     )}
   </article>)
