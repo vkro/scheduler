@@ -3,6 +3,7 @@ import "components/Appointment/styles.scss"
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
+import Error from "./Error";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
@@ -18,6 +19,8 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM";
   const DELETING = "DELETING";
   const EDITING = "EDITING"
+  const ERROR_SAVING = "ERROR_SAVING"
+  const ERROR_DELETING = "ERROR_DELETING"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -33,14 +36,17 @@ export default function Appointment(props) {
     // transition to save mode first
     transition(SAVING);
     props.bookInterview(props.id, interview)
-      .then(() => transition(SHOW));
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVING, true))
   };
 
   const deleteInterview = function () {
-    transition(DELETING);
-    props.cancelInterview(props.id)
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-  }
+      .catch(error => transition(ERROR_DELETING, true))
+  };
 
   return (<article className="appointment">
     <Header
@@ -73,6 +79,12 @@ export default function Appointment(props) {
         message="Deleting"
       />
     )}
+    {mode === ERROR_DELETING && (
+      <Error
+      message="Could not cancel appointment."
+      onClose={() => back()}
+      />
+    )}
     {mode === CONFIRM && (
       <Confirm
         onCancel={() => back()}
@@ -80,8 +92,7 @@ export default function Appointment(props) {
         message="Are you sure you would like to delete?"
       />
     )}
-    {
-      mode === EDITING && (
+    {mode === EDITING && (
         <Form
         name={props.interview.student}
         interviewer={props.interview.interviewer.id}
@@ -90,9 +101,14 @@ export default function Appointment(props) {
         // pass name and interviweer from the Form to save function
         onSave={(name, interviewer) => save(name, interviewer)}
         />
+    )}
+    {mode === ERROR_SAVING && (
+      <Error
+      message="Could not edit appointment."
+      onClose={() => back()}
+      />
+    )}
 
-      )
-    }
   </article>)
 
 };
