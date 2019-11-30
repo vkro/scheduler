@@ -47,6 +47,25 @@ export default function useApplicationData() {
     )
   };
 
+  const cancelInterview = function(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return (
+      axios({
+        method: 'delete',
+        url: `http://localhost:8001/api/appointments/${id}`,
+      })
+        .then(() => setState(prev => ({ ...prev, appointments })))
+    )
+  };
 
 
 
@@ -56,7 +75,7 @@ export default function useApplicationData() {
     state,
     setDay,
     setState,
-    bookInterview
-    //cancelInterview
+    bookInterview,
+    cancelInterview
   }
 };

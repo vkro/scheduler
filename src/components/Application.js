@@ -13,7 +13,8 @@ export default function Application(props) {
     state,
     setDay,
     setState,
-    bookInterview
+    bookInterview,
+    cancelInterview
   } = useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day)
@@ -21,25 +22,7 @@ export default function Application(props) {
 
 
 
-  const cancelInterview = function(id) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
-    return (
-      axios({
-        method: 'delete',
-        url: `http://localhost:8001/api/appointments/${id}`,
-      })
-        .then(() => setState(prev => ({ ...prev, appointments })))
-    )
-  };
+  
 
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
