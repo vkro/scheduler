@@ -12,35 +12,14 @@ export default function Application(props) {
   const {
     state,
     setDay,
-    setState
+    setState,
+    bookInterview
   } = useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day)
   const interviewers = getInterviewersForDay(state, state.day)
 
-  const bookInterview = function(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
 
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
-    return (
-      axios({
-        method: 'put',
-        url: `http://localhost:8001/api/appointments/${id}`,
-        data: { interview: { ...interview } }
-      })
-        .then(() => {
-          setState(prev => ({ ...prev, appointments })
-          )
-        })
-    )
-  };
 
   const cancelInterview = function(id) {
     const appointment = {

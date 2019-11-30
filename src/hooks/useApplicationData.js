@@ -23,6 +23,29 @@ export default function useApplicationData() {
     });
   }, []);
 
+  const bookInterview = function(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return (
+      axios({
+        method: 'put',
+        url: `http://localhost:8001/api/appointments/${id}`,
+        data: { interview: { ...interview } }
+      })
+        .then(() => {
+          setState(prev => ({ ...prev, appointments })
+          )
+        })
+    )
+  };
 
 
 
@@ -32,8 +55,8 @@ export default function useApplicationData() {
   return {
     state,
     setDay,
-    setState
-    //bookInterview,
+    setState,
+    bookInterview
     //cancelInterview
   }
 };
