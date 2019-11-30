@@ -52,7 +52,7 @@ export default function Application(props) {
           setState(prev => ({ ...prev, appointments })
           )
         })
-        .catch(err => `this is the error ${err}`)
+        .catch(err => err)
     )
   };
 
@@ -72,8 +72,8 @@ export default function Application(props) {
         method: 'delete',
         url: `http://localhost:8001/api/appointments/${id}`,
       })
-      .then(() => setState(prev => ({...prev, appointments }))
-      )
+      .then(() => setState(prev => ({...prev, appointments })))
+      .catch(err => err)
     )
   };
 
