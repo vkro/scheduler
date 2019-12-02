@@ -33,7 +33,7 @@ export default function useApplicationData() {
       })
 
     } else if (action.type === SET_INTERVIEW) {
-      return ({ ...state, appointments: action.value })
+      return ({ ...state, appointments: action.value.appointments })
 
     } else {
       throw new Error(
@@ -78,7 +78,7 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: appointments
+            value: {appointments, id, updateSpot: "subtract"}
           })
         })
     )
@@ -103,7 +103,7 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: appointments
+            value: {appointments, id, updateSpot: "add"}
           })
         })
     )
