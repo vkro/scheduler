@@ -64,6 +64,7 @@ export default function useApplicationData() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  //make req to get all app data (days, appointments, interviewers) and update state 
   useEffect(() => {
     Promise.all([
       Promise.resolve(axios.get("http://localhost:8001/api/days")),
@@ -75,6 +76,7 @@ export default function useApplicationData() {
 
   const setDay = day => dispatch({ type: SET_DAY, value: day });
 
+  //update database and state when interview booked/edited
   const bookInterview = function (id, interview) {
 
     const appointment = {
@@ -98,6 +100,8 @@ export default function useApplicationData() {
     );
   };
 
+
+  //update database and state when appointment is cancelled
   const cancelInterview = function (id) {
     const appointment = {
       ...state.appointments[id],
