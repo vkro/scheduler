@@ -33,7 +33,7 @@ export default function useApplicationData() {
       })
 
     } else if (action.type === SET_INTERVIEW) {
-      return ({ ...state, appointmemts: action.value })
+      return ({ ...state, appointments: action.value })
 
     } else {
       throw new Error(
