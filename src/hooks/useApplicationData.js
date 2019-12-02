@@ -21,10 +21,10 @@ export default function useApplicationData() {
 
 
   const reducer = function (state, action) {
-
+    //update currently selected day in state
     if (action.type === SET_DAY) {
       return ({ ...state, day: action.value });
-
+      //set state with all app data from api calls
     } else if (action.type === SET_APPLICATION_DATA) {
       return ({
         ...state,
@@ -32,27 +32,27 @@ export default function useApplicationData() {
         appointments: action.value[1]["data"],
         interviewers: action.value[2]["data"]
       })
-
+      //update appointments in state with new interview data
     } else if (action.type === SET_INTERVIEW) {
       return ({ ...state, appointments: action.value.appointments })
-
+      //update spots for day containing added/cancelled appointment
     } else if (action.type === SET_SPOTS) {
-
-      const updateDays = function (daysArray, id, operation) {
-
-        const updatedDays = daysArray.map((day) => {
+      const updateDays = function (daysArr, updatedDaysArr, id) {
+        //look through the list of days in current state
+        const updatedDays = daysArr.map((day, index) => {
+          //if day at index contains the id in its list of appointments
           if (day.appointments.includes(id)) {
-            if (operation === "subtract") {
-              return { ...day, spots: day.spots-- }
-            } else {
-              return { ...day, spots: day.spots++ }
-            }
-          }
+              //then update the spots for that day with the updated spots from the api/days response
+              return { ...day, spots: updatedDaysArr[index]['spots'] }
+            } 
+          // otherwise keep day as is
           return day
         })
+        //return mapped days array
         return updatedDays
       }
-      return ({ ...state, days: updateDays(state.days, action.value.id, action.value.operation) })
+        //update state with mapped days array
+      return ({ ...state, days: updateDays(state.days, action.value[0]['data'], action.value[1]) })
 
 
     } else {
@@ -69,10 +69,7 @@ export default function useApplicationData() {
       Promise.resolve(axios.get("http://localhost:8001/api/days")),
       Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
       Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
-    ]).then((all) => dispatch({
-      type: SET_APPLICATION_DATA,
-      value: all
-    }))
+    ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }))
       .catch(err => `Use Effect Promises error: ${err}`)
   }, []);
 
@@ -95,20 +92,11 @@ export default function useApplicationData() {
         url: `http://localhost:8001/api/appointments/${id}`,
         data: { interview: { ...interview } }
       })
-        .then(() => {
-          dispatch({
-            type: SET_INTERVIEW,
-            value: { appointments }
-          })
-        })
-        .then(() => {
-          dispatch({
-            type: SET_SPOTS,
-            value: { id, operation: "subtract" }
-          })
-        })
-    )
-  }
+        .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
+        .then(() => axios.get("http://localhost:8001/api/days"))
+        .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+    );
+  };
 
   const cancelInterview = function (id) {
     const appointment = {
@@ -126,19 +114,10 @@ export default function useApplicationData() {
         method: 'delete',
         url: `http://localhost:8001/api/appointments/${id}`
       })
-        .then(() => {
-          dispatch({
-            type: SET_INTERVIEW,
-            value: { appointments }
-          })
-        })
-        .then(() => {
-          dispatch({
-            type: SET_SPOTS,
-            value: { id, operation: "add" }
-          })
-        })
-    )
+        .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
+        .then(() => axios.get("http://localhost:8001/api/days"))
+        .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+    );
   };
 
   return {
@@ -146,5 +125,5 @@ export default function useApplicationData() {
     setDay,
     bookInterview,
     cancelInterview
-  }
+  };
 };
