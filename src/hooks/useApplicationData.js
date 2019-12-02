@@ -17,6 +17,7 @@ export default function useApplicationData() {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  const SET_SPOTS = "SET_SPOTS";
 
 
   const reducer = function (state, action) {
@@ -33,6 +34,12 @@ export default function useApplicationData() {
       })
 
     } else if (action.type === SET_INTERVIEW) {
+
+      function updateSpotsInDay(array, apptId, operation) {
+
+      }
+
+
       return ({ ...state, appointments: action.value.appointments })
 
     } else {
@@ -78,7 +85,13 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: {appointments, id, updateSpot: "subtract"}
+            value: {appointments}
+          })
+        })
+        .then(() => {
+          dispatch({
+            type: SET_SPOTS,
+            value: {id, operation: "subtract"}
           })
         })
     )
@@ -103,7 +116,13 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: {appointments, id, updateSpot: "add"}
+            value: {appointments}
+          })
+        })
+        .then(() => {
+          dispatch({
+            type: SET_SPOTS,
+            value: {id, operation: "add"}
           })
         })
     )
