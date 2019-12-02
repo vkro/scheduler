@@ -25,7 +25,9 @@ export default function useApplicationData() {
     if (action.type === SET_DAY) {
       return ({ ...state, day: action.value });
       //set state with all app data from api calls
-    } else if (action.type === SET_APPLICATION_DATA) {
+    }
+    
+    if (action.type === SET_APPLICATION_DATA) {
       return ({
         ...state,
         days: action.value[0]["data"],
@@ -33,10 +35,14 @@ export default function useApplicationData() {
         interviewers: action.value[2]["data"]
       })
       //update appointments in state with new interview data
-    } else if (action.type === SET_INTERVIEW) {
+    }
+    
+    if (action.type === SET_INTERVIEW) {
       return ({ ...state, appointments: action.value.appointments })
       //update spots for day containing added/cancelled appointment
-    } else if (action.type === SET_SPOTS) {
+    }
+    
+    if (action.type === SET_SPOTS) {
       const updateDays = function (daysArr, updatedDaysArr, id) {
         //look through the list of days in current state
         const updatedDays = daysArr.map((day, index) => {
@@ -53,14 +59,12 @@ export default function useApplicationData() {
       }
         //update state with mapped days array
       return ({ ...state, days: updateDays(state.days, action.value[0]['data'], action.value[1]) })
-
-
-    } else {
-      throw new Error(
-        `tried to reduce with unsupported action type: ${action.type}`
-      );
     }
-  };
+    
+    throw new Error(
+        `tried to reduce with unsupported action type: ${action.type}`
+      )
+    }
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
