@@ -34,13 +34,26 @@ export default function useApplicationData() {
       })
 
     } else if (action.type === SET_INTERVIEW) {
-
-      function updateSpotsInDay(array, apptId, operation) {
-
-      }
-
-
       return ({ ...state, appointments: action.value.appointments })
+
+    } else if (action.type === SET_SPOTS) {
+
+      const updateDays = function (daysArray, id, operation) {
+
+        const updatedDays = daysArray.map((day) => {
+          if (day.appointments.includes(id)) {
+            if (operation === "subtract") {
+              return { ...day, spots: day.spots-- }
+            } else {
+              return { ...day, spots: day.spots++ }
+            }
+          }
+          return day
+        })
+        return updatedDays
+      }
+      return ({ ...state, days: updateDays(state.days, action.value.id, action.value.operation) })
+
 
     } else {
       throw new Error(
@@ -85,13 +98,13 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: {appointments}
+            value: { appointments }
           })
         })
         .then(() => {
           dispatch({
             type: SET_SPOTS,
-            value: {id, operation: "subtract"}
+            value: { id, operation: "subtract" }
           })
         })
     )
@@ -116,13 +129,13 @@ export default function useApplicationData() {
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
-            value: {appointments}
+            value: { appointments }
           })
         })
         .then(() => {
           dispatch({
             type: SET_SPOTS,
-            value: {id, operation: "add"}
+            value: { id, operation: "add" }
           })
         })
     )
