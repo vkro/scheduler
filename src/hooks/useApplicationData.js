@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 
+
+
 // When we dispatch an action, we expect the reducer to handle it and
 // replace the current state. When the component renders, it will use
 // the latest state to generate an updated view.
@@ -71,9 +73,9 @@ export default function useApplicationData() {
   //make req to get all app data (days, appointments, interviewers) and update state 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(axios.get("http://localhost:8001/api/days")),
-      Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
-      Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+      Promise.resolve(axios.get("/api/interviewers"))
     ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }))
       .catch(err => `Use Effect Promises error: ${err}`)
   }, []);
@@ -95,11 +97,11 @@ export default function useApplicationData() {
     return (
       axios({
         method: 'put',
-        url: `http://localhost:8001/api/appointments/${id}`,
+        url: `/api/appointments/${id}`,
         data: { interview: { ...interview } }
       })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
-        .then(() => axios.get("http://localhost:8001/api/days"))
+        .then(() => axios.get("/api/days"))
         .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
@@ -120,10 +122,10 @@ export default function useApplicationData() {
     return (
       axios({
         method: 'delete',
-        url: `http://localhost:8001/api/appointments/${id}`
+        url: `/api/appointments/${id}`
       })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
-        .then(() => axios.get("http://localhost:8001/api/days"))
+        .then(() => axios.get("/api/days"))
         .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
