@@ -42,7 +42,7 @@ describe("Form", () => {
     />);
     /* 3. Click the save button */
     fireEvent.click(getByText("Save"));
-      
+
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
   });
@@ -51,7 +51,7 @@ describe("Form", () => {
     
     const onSave = jest.fn();
 
-    const {queryByText} = render(
+    const {queryByText, getByText} = render(
       <Form
         interviewers={interviewers}
         name="Lydia Miller-Jones"
@@ -59,7 +59,7 @@ describe("Form", () => {
       />
     );
 
-    const btn = queryByText("Save");
+    const btn = getByText("Save");
     fireEvent.click(btn);
 
     expect(onSave).toHaveBeenCalledTimes(1);
