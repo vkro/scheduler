@@ -54,9 +54,10 @@ const fixtures = {
 };
 
 export default {
-  get: jest.fn(url => {
+  defaults: { baseURL: "" },
+  get: jest.fn(function(url) {
+
     if (url === "/api/days") {
-      //resolve days data
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -65,7 +66,7 @@ export default {
     }
 
     if (url === "/api/appointments") {
-      //resolve appointments data
+      /* Resolve appointments data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -74,12 +75,18 @@ export default {
     }
 
     if (url === "/api/interviewers") {
-      //resolve interviewers data
+      /* Resolve interviewers data */
       return Promise.resolve({
-        status: 200, 
+        status: 200,
         statusText: "OK",
         data: fixtures.interviewers
       });
     }
+
+    return Promise.reject({
+      status: 404,
+      statusText: "404 Resource"
+    });
+    
   })
 };
