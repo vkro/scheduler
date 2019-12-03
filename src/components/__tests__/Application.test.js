@@ -6,7 +6,7 @@ import Application from "components/Application";
 import { exportAllDeclaration } from "@babel/types";
 
 describe('Test', () => {
-
+  // >>> Needed this before, but not anymore - nothing changed so keep it just in case???
   // beforeEach(() => {
   //   jest.mock('axios', () => require('../../__mocks__/axios.js'))
   // });
@@ -22,5 +22,7 @@ describe('Test', () => {
   
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
+
+
 
 })
