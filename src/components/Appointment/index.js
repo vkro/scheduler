@@ -48,7 +48,7 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_DELETING, true))
   };
 
-  return (<article className="appointment">
+  return (<article className="appointment" data-testid="appointment">
     <Header
       time={props.time}
     />
