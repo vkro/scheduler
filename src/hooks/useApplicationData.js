@@ -95,11 +95,7 @@ export default function useApplicationData() {
     };
 
     return (
-      axios({
-        method: 'put',
-        url: `/api/appointments/${id}`,
-        data: { interview: { ...interview } }
-      })
+      axios.put(`/api/appointments/${id}`, { interview: interview })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
         .then(() => axios.get("/api/days"))
         .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
