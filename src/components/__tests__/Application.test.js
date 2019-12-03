@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlaceholderText, getByText, prettyDOM, waitForElement } from "@testing-library/react";
+import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlaceholderText, getByText, prettyDOM, waitForElement, waitForElementToBeRemoved } from "@testing-library/react";
 
 import Application from "components/Application";
 import { exportAllDeclaration } from "@babel/types";
@@ -42,11 +42,13 @@ describe('Application', () => {
     
     fireEvent.click(getByText(appointment, "Save"))
 
-    debug();
-
-    // console.log(prettyDOM(appointment));
-
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
+
+    expect(getByText(appointment, "Lydia Miller-Jones")).toBeInTheDocument();
+
+
 
 
   })
