@@ -4,6 +4,7 @@ import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlacehol
 
 import Application from "components/Application";
 import { exportAllDeclaration } from "@babel/types";
+import { notDeepEqual } from "assert";
 
 describe('Application', () => {
   // >>> Needed this before, but not anymore - nothing changed so keep it just in case???
@@ -24,7 +25,7 @@ describe('Application', () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
-    const { container } = render(<Application />);
+    const { container, debug } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -41,10 +42,11 @@ describe('Application', () => {
     
     fireEvent.click(getByText(appointment, "Save"))
 
+    debug();
+
     // console.log(prettyDOM(appointment));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
-
 
 
   })
