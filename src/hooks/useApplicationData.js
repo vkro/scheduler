@@ -23,12 +23,14 @@ export default function useApplicationData() {
 
 
   const reducer = function (state, action) {
+
     //update currently selected day in state
     if (action.type === SET_DAY) {
       return ({ ...state, day: action.value });
       //set state with all app data from api calls
     }
 
+    //initial state after getting data from api calls
     if (action.type === SET_APPLICATION_DATA) {
       return ({
         ...state,
@@ -36,12 +38,12 @@ export default function useApplicationData() {
         appointments: action.value[1]["data"],
         interviewers: action.value[2]["data"]
       })
-      //update appointments in state with new interview data
     }
 
+    //update appointments in state with new interview data
     if (action.type === SET_INTERVIEW) {
 
-      const appointments = action.value.appointments; 
+      const appointments = action.value.appointments;
 
       const updateSpotCount = function (day) {
         // number of open spots starts at 0
@@ -77,7 +79,8 @@ export default function useApplicationData() {
 
       // new state for days array
       const days = updateDays(state.days, action.value.id);
-      
+
+      // set state with updated appointments and days
       return ({ ...state, appointments: action.value.appointments, days: days })
     }
 
@@ -87,6 +90,7 @@ export default function useApplicationData() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
 
   //make req to get all app data (days, appointments, interviewers) and update state 
   useEffect(() => {
@@ -99,9 +103,6 @@ export default function useApplicationData() {
   }, []);
 
   const setDay = day => dispatch({ type: SET_DAY, value: day });
-
-
-
 
 
   //update database and state when interview booked/edited
@@ -119,7 +120,6 @@ export default function useApplicationData() {
     return (
       axios.put(`/api/appointments/${id}`, { interview: { ...interview } })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments, id } }))
-      // .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
@@ -142,7 +142,6 @@ export default function useApplicationData() {
         url: `/api/appointments/${id}`
       })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments, id } }))
-      // .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
