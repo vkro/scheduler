@@ -1,9 +1,8 @@
 import React from "react";
 
-import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlaceholderText, getByText, prettyDOM, waitForElement, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlaceholderText, getByText, prettyDOM, queryByText, waitForElement, waitForElementToBeRemoved } from "@testing-library/react";
 
 import Application from "components/Application";
-import { exportAllDeclaration } from "@babel/types";
 import { notDeepEqual } from "assert";
 
 describe('Application', () => {
@@ -32,27 +31,29 @@ describe('Application', () => {
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
 
-    fireEvent.click(getByAltText(appointment, "Add"))
+    fireEvent.click(getByAltText(appointment, "Add"));
 
-    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
+    fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
       target: { value: "Lydia Miller-Jones" }
     });
 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"))
-    
     fireEvent.click(getByText(appointment, "Save"))
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
     await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
-
     expect(getByText(appointment, "Lydia Miller-Jones")).toBeInTheDocument();
+    expect(getByAltText(appointment, "Delete")).toBeInTheDocument();
 
+    console.log(prettyDOM(appointment))
 
+    const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"));
 
+    console.log(prettyDOM(day))
+
+    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
 
   })
-
-
 
 })
