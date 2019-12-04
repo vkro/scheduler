@@ -97,8 +97,8 @@ export default function useApplicationData() {
     return (
       axios.put(`/api/appointments/${id}`, { interview: interview })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
-        .then(() => axios.get("/api/days"))
-        .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+        // .then(() => axios.get("/api/days"))
+        .then(() => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
@@ -121,8 +121,8 @@ export default function useApplicationData() {
         url: `/api/appointments/${id}`
       })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
-        .then(() => axios.get("/api/days"))
-        .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+        // .then(() => axios.get("/api/days"))
+        .then(() => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
