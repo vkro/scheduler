@@ -6,7 +6,7 @@ import Application from "components/Application";
 import { notDeepEqual } from "assert";
 
 describe('Application', () => {
-  // >>> Needed this before, but not anymore - nothing changed so keep it just in case???
+
   beforeEach(() => {
     jest.mock('axios', () => require('../../__mocks__/axios.js'))
   });
@@ -46,11 +46,9 @@ describe('Application', () => {
     expect(getByText(appointment, "Lydia Miller-Jones")).toBeInTheDocument();
     expect(getByAltText(appointment, "Delete")).toBeInTheDocument();
 
-    // console.log(prettyDOM(appointment))
-
     const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"));
 
-    // expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
 
   })
 
