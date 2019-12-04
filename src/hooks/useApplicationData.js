@@ -44,24 +44,24 @@ export default function useApplicationData() {
       //update spots for day containing added/cancelled appointment
     }
     
-    if (action.type === SET_SPOTS) {
-      const updateDays = function (daysArr, updatedDaysArr, id) {
-        //look through the list of days in current state
-        const updatedDays = daysArr.map((day, index) => {
-          //if day at index contains the id in its list of appointments
-          if (day.appointments.includes(id)) {
-              //then update the spots for that day with the updated spots from the api/days response
-              return { ...day, spots: updatedDaysArr[index]['spots'] }
-            } 
-          // otherwise keep day as is
-          return day
-        })
-        //return mapped days array
-        return updatedDays
-      }
-        //update state with mapped days array
-      return ({ ...state, days: updateDays(state.days, action.value[0]['data'], action.value[1]) })
-    }
+    // if (action.type === SET_SPOTS) {
+    //   const updateDays = function (daysArr, id) {
+    //     //look through the list of days in current state
+    //     const updatedDays = daysArr.map((day, index) => {
+    //       //if day at index contains the id in its list of appointments
+    //       if (day.appointments.includes(id)) {
+    //           //then update the spots for that day with the updated spots from the api/days response
+    //           return { ...day, spots: updatedDaysArr[index]['spots'] }
+    //         } 
+    //       // otherwise keep day as is
+    //       return day
+    //     })
+    //     //return mapped days array
+    //     return updatedDays
+    //   }
+    //     //update state with mapped days array
+    //   return ({ ...state, days: updateDays(state.days, action.value[0]['data'], action.value[1]) })
+    // }
     
     throw new Error(
         `tried to reduce with unsupported action type: ${action.type}`
@@ -95,10 +95,10 @@ export default function useApplicationData() {
     };
 
     return (
-      axios.put(`/api/appointments/${id}`, { interview: interview })
+      axios.put(`/api/appointments/${id}`, { interview: { ...interview }}) 
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
         // .then(() => axios.get("/api/days"))
-        .then(() => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+        // .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
@@ -122,7 +122,7 @@ export default function useApplicationData() {
       })
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
         // .then(() => axios.get("/api/days"))
-        .then(() => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
+        // .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
 
