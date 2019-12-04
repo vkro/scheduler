@@ -141,7 +141,7 @@ export default function useApplicationData() {
         method: 'delete',
         url: `/api/appointments/${id}`
       })
-        .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments } }))
+        .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments, id } }))
       // .then(res => dispatch({ type: SET_SPOTS, value: [ res, id ] }))
     );
   };
