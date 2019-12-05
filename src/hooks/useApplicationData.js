@@ -56,7 +56,7 @@ export default function useApplicationData() {
           // and check out the status of its interview
           // if (stateAppts[id]   )
           if (stateAppts[(day.appointments[id])]['interview'] === null) {
-            spots = spots + 1
+            ++spots
           }
         }
         return spots
