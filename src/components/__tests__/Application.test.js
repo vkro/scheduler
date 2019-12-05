@@ -50,6 +50,28 @@ describe('Application', () => {
 
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
 
-  })
+  });
 
-})
+  it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
+  
+  
+  });
+
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  
+  
+  });
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  
+  
+  });
+  it("shows the save error when failing to save an appointment", async () => {
+  
+  
+  });
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+  
+  
+  });
+
+});
