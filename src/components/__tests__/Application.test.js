@@ -1,8 +1,7 @@
 import React from "react";
-
 import { render, cleanup, fireEvent, getByAltText, getAllByTestId, getByPlaceholderText, getByText, prettyDOM, queryByText, waitForElement, waitForElementToBeRemoved } from "@testing-library/react";
-
 import Application from "components/Application";
+import axios from "axios";
 import { notDeepEqual } from "assert";
 
 describe('Application', () => {
@@ -105,11 +104,43 @@ describe('Application', () => {
   });
 
   it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
+    const { container, debug } = render(<Application />);
 
+    await waitForElement(() => getByText(container, "Archie Cohen"));
 
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[0];
+
+    fireEvent.click(getByAltText(appointment, "Add"));
+
+    fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
+
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"))
+    fireEvent.click(getByText(appointment, "Save"))
+    await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
+
+    expect(getByText(appointment, /Could not edit appointment./i)).toBeInTheDocument();
   });
-  it("shows the delete error when failing to delete an existing appointment", async () => {
 
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
+    const { container, debug } = render(<Application />);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[1];
+
+    fireEvent.click(getByAltText(appointment, "Delete"));
+    expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
+
+    fireEvent.click(getByText(appointment, "Confirm"))
+    await waitForElementToBeRemoved(() => getByText(appointment, "Deleting"));
+
+    expect(getByText(appointment, /Could not cancel appointment/i)).toBeInTheDocument();
 
   });
 
