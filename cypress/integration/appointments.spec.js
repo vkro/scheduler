@@ -1,7 +1,12 @@
 describe("Appointments", () => {
   
-  it("should visit root", () => {
+  it("should book an appointment", () => {
     cy.visit("/");
-  });
+    cy.contains("Monday");
 
+    cy.get("[alt=Add]")
+    .first()
+    .click();
+
+  })
 });
