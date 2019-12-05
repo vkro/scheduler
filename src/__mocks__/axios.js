@@ -100,6 +100,20 @@ export default {
     return Promise.reject({
       status: 404,
       statusText: "404 Resource"
-    });
+    })
   }),
+
+  delete: jest.fn(function(url) {
+    if (url === `/api/appointments/2`) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "Resource deleted successfully",
+      });
+    }
+
+    return Promise.reject({
+      status: 404,
+      statusText: "404 Resource"
+    })
+  })
 };
