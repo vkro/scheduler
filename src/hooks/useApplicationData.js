@@ -137,10 +137,7 @@ export default function useApplicationData() {
     };
 
     return (
-      axios({
-        method: 'delete',
-        url: `/api/appointments/${id}`
-      })
+      axios.delete(`/api/appointments/${id}`)
         .then(() => dispatch({ type: SET_INTERVIEW, value: { appointments, id } }))
     );
   };
