@@ -123,6 +123,9 @@ describe('Application', () => {
     await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
 
     expect(getByText(appointment, /Could not edit appointment./i)).toBeInTheDocument();
+
+    fireEvent.click(getByAltText(appointment, "Close"))
+    expect(getByPlaceholderText(appointment, /Enter Student Name/i)).toBeInTheDocument();
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
@@ -142,6 +145,8 @@ describe('Application', () => {
 
     expect(getByText(appointment, /Could not cancel appointment/i)).toBeInTheDocument();
 
+    fireEvent.click(getByAltText(appointment, "Close"))
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
   });
 
 });
