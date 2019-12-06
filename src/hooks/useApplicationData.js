@@ -6,8 +6,6 @@ import reducer, {
   SET_INTERVIEW
 } from "reducers/application";
 
-
-
 // When we dispatch an action, we expect the reducer to handle it and
 // replace the current state. When the component renders, it will use
 // the latest state to generate an updated view.

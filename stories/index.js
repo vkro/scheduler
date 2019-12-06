@@ -33,7 +33,7 @@ storiesOf("DayListItem", module)
     // action() allows us to create a callback that appears in the actions panel when clicked
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
-
+//stories for button component
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -67,7 +67,7 @@ const days = [
     spots: 0
   }
 ];
-
+// stories for DayList component
 storiesOf("DayList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -82,8 +82,7 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
   ));
 
-
-  // Stories for InterviewerListItem
+  // Stories for InterviewerListItem component
   const interviewer = {
     id: 1,
     name: "Sylvia Palmer",
@@ -126,7 +125,7 @@ storiesOf("DayList", module)
       { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
       { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
     ];
-    
+    // stories for InterviewerList component
     storiesOf("InterviewerList", module)
       .addParameters({
         backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -145,8 +144,6 @@ storiesOf("DayList", module)
         />
       ));
 
-
-
       const student = {
         id: 1,
         name: "Lynda Miller-Jones"
@@ -157,6 +154,7 @@ storiesOf("DayList", module)
       const saveStatusMessage = "Saving";
       const errorMessage = "Could not delete appointment";
 
+      // stories for Appointment module
       storiesOf("Appointment", module)
       .addParameters({
         backgrounds: [{ name: "white", value: "#fff", default: true}]
@@ -227,5 +225,5 @@ storiesOf("DayList", module)
           />
           <Appointment id="last" time="1pm" />
         </Fragment>
-      ))
+      ));
 

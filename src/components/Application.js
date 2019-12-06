@@ -1,10 +1,9 @@
 import React from "react";
 import DayList from "components/DayList";
-import Appointment from "components/Appointment/index"
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors.jsx"
+import Appointment from "components/Appointment/index";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors.jsx";
 import "components/Application.scss";
 import useApplicationData from "hooks/useApplicationData";
-
 
 export default function Application(props) {
 
@@ -15,8 +14,8 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  const appointments = getAppointmentsForDay(state, state.day)
-  const interviewers = getInterviewersForDay(state, state.day)
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
@@ -30,9 +29,9 @@ export default function Application(props) {
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
       />
-    )
+    );
   });
-  // return of top level Application function
+  // return of top level Application
   return (
     <main className="layout">
       <section className="sidebar">
@@ -61,4 +60,4 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+};

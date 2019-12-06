@@ -1,18 +1,17 @@
 // helper selector functions for scheduler application
 
-
 // get appointments for a given day
 export function getAppointmentsForDay(state, day) {
 
   const stateAppts = state.appointments;
   
-  // get list of appointments in state for given day
+  // get list of appointments in current state for the  given day
   const getAppointments = function(state, day) {
     let appointments = [];
     state.days.forEach(obj => {
       if (obj.name === day) {
         appointments =  obj.appointments;
-      }
+      };
     });
     return appointments;
   };
@@ -29,11 +28,11 @@ export function getAppointmentsForDay(state, day) {
 };
 
 // get interviewer's data given an object that contains an interviewer
-// returns null if no interview is booked
+// return null if no interview is booked
 export function getInterview(state, interview) {
 
   if (interview === null) {
-    return null
+    return null;
   } else {
     const interviewerId = interview.interviewer;
     const interviewers = state.interviewers;
@@ -43,11 +42,11 @@ export function getInterview(state, interview) {
       // for each interviewer obj in obj, check if id = given interviewer id
       if (interviewers[key]['id'] === interviewerId) {
         // update new interview object with interviewer obj from state
-        newInterview["interviewer"] = {...interviewers[key]};
-      }
-    })
+        newInterview["interviewer"] = interviewers[key];
+      };
+    });
   return newInterview;
-  }
+  };
 };
 
 
@@ -62,7 +61,7 @@ export function getInterviewersForDay(state, day) {
     state.days.forEach(obj => {
       if (obj.name === day) {
         interviewers =  obj.interviewers;
-      }
+      };
     });
     return interviewers;
   };
@@ -75,5 +74,5 @@ export function getInterviewersForDay(state, day) {
   let interviewers = getInterviewers(state, day);
   let getInterviewerObject = getInterviewerDetails(stateInterviewers, interviewers);
 
-  return getInterviewerObject
+  return getInterviewerObject;
 };
