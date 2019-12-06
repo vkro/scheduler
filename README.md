@@ -47,7 +47,13 @@ npm test
 npm run storybook
 ```
 ## Final Product
+![Schedule - appointment hover](https://github.com/vkro/scheduler/blob/master/docs/schedule-appointment-hover.png?raw=true)
 
+![Schedule - hover](https://github.com/vkro/scheduler/blob/master/docs/schedule-hover.png?raw=true)
+
+![Appointment form](https://github.com/vkro/scheduler/blob/master/docs/appointment-form.png?raw=true)
+
+![Scheduler - mobile](https://github.com/vkro/scheduler/blob/master/docs/scheduler-mobile.png?raw=true)
 
 
 
