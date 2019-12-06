@@ -55,7 +55,7 @@ export default function Appointment(props) {
     <Header
       time={props.time}
     />
-    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />};
+    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
     {mode === SHOW && (
       <Show
         student={props.interview.student}
@@ -63,7 +63,7 @@ export default function Appointment(props) {
         onEdit={() => transition(EDITING)}
         onDelete={() => transition(CONFIRM)}
       />
-    )};
+    )}
     {mode === CREATE && (
       <Form
         interviewers={props.interviewers}
@@ -71,30 +71,30 @@ export default function Appointment(props) {
         // pass name and interviweer from the Form to save function
         onSave={(name, interviewer) => save(name, interviewer)}
       />
-    )};
+    )}
     {mode === SAVING && (
       <Status
         message="Saving"
       />
-    )};
+    )}
     {mode === DELETING && (
       <Status
         message="Deleting"
       />
-    )};
+    )}
     {mode === ERROR_DELETING && (
       <Error
       message="Could not cancel appointment."
       onClose={() => back()}
       />
-    )};
+    )}
     {mode === CONFIRM && (
       <Confirm
         onCancel={() => back()}
         onConfirm={() => deleteInterview()}
         message="Are you sure you would like to delete?"
       />
-    )};
+    )}
     {mode === EDITING && (
         <Form
         name={props.interview.student}
@@ -104,13 +104,13 @@ export default function Appointment(props) {
         // pass name and interviweer from the Form to save function
         onSave={(name, interviewer) => save(name, interviewer)}
         />
-    )};
+    )}
     {mode === ERROR_SAVING && (
       <Error
       message="Could not edit appointment."
       onClose={() => back()}
       />
-    )};
+    )}
 
-  </article>);
+  </article>)
 };

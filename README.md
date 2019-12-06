@@ -1,8 +1,33 @@
 # Interview Scheduler
 
-## Setup
+Interview Scheduler is a React application that allows users to book and cancel interviews. 
 
-Install dependencies with `npm install`.
+The Scheduler client application created using Create React App. Express is the basis for the [Scheduler Api](https://github.com/vkro/scheduler-api) server application.
+
+Both servers run concurrently; requests are proxied from the Webpack development server to the API server.
+
+## Getting Started
+
+1. Fork this repository, then clone your fork.
+2. Install dependencies using the `npm install` command.
+3. The application uses two servers: the scheduler client (this) running on localhost port 8000, and the scheduler server ([scheduler-api](https://github.com/vkro/scheduler-api)) running on localhost port 8001.
+4. Fork and clone the [scheduler-api](https://github.com/vkro/scheduler-api) into a new directory (NOT within the current scheduler directory) and follow the README.md instructions to configure and run the API server.
+
+## Dependencies
+- axios
+- classnames
+- normalize
+- react
+
+## Dev Dependencies
+- babel
+- storybook
+- testing-library
+  -  /react
+  -  /react-hooks
+  -  /jest-dom
+- prop-types
+- react-test-renderer
 
 ## Running Webpack Development Server
 
@@ -21,3 +46,10 @@ npm test
 ```sh
 npm run storybook
 ```
+## Final Product
+
+
+
+
+## Contributions
+Code to initiate the project and roadmap from [Lighthouse Labs](https://www.lighthouselabs.ca/). Debugging and ongoing code review from [@stella-zb](https://github.com/stella-zb). 
