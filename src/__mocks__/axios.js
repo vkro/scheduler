@@ -85,7 +85,7 @@ export default {
 
     return Promise.reject({
       status: 404,
-      statusText: "404 Resource"
+      statusText: "404 Resource not found"
     });
   }),
 
@@ -99,7 +99,7 @@ export default {
 
     return Promise.reject({
       status: 404,
-      statusText: "404 Resource"
+      statusText: "404 Resource not found"
     })
   }),
 
@@ -113,7 +113,7 @@ export default {
 
     return Promise.reject({
       status: 404,
-      statusText: "404 Resource"
+      statusText: "404 Resource not found"
     })
   })
 };
